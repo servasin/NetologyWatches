@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Clock = () =>{
-  let time  = new Date().toLocaleTimeString()
+const Clock = ({timeZone=3}) =>{
 
-  const [ctime,setTime] = useState(time)
+  const [ctime,setTime] = useState('')
 
-  const UpdateTime=()=>{
-    time =  new Date().toLocaleTimeString()
+  useEffect(() => {
+  const interval = setInterval(() => {
+    
+    const addZero = i => { return i < 10 ? '0' + i : i }
+
+    let d = new Date();
+    let h = addZero(d.getUTCHours());
+    let m = addZero(d.getUTCMinutes());
+    let s = addZero(d.getUTCSeconds());
+
+    let time = h + timeZone + ':' + m + ':' + s;
     setTime(time)
-  }
-  setInterval(UpdateTime)
+
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
 
   return (
   <span>{ctime}</span>
