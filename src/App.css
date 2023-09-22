@@ -9,7 +9,7 @@
   border-bottom: 1px solid gray;
 }
 
-.time-list {
+.time-list-item {
   display: flex;
   justify-content: space-between;
 }

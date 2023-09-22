@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react";
 
-const Clock = ({timeZone=3}) =>{
+const Clock = ({timeZone}) =>{
+  timeZone = Number(timeZone)
 
-  const [ctime,setTime] = useState('')
+  const [ctime,setTime] = useState(setTimeZone())
 
-  useEffect(() => {
-  const interval = setInterval(() => {
-    
+  function setTimeZone() {
     const addZero = i => { return i < 10 ? '0' + i : i }
+    const get24Hours = n => { return n > 23 ? n - 24 : n }
 
     let d = new Date();
-    let h = addZero(d.getUTCHours());
+    let h = get24Hours(d.getUTCHours() + timeZone);
+    
     let m = addZero(d.getUTCMinutes());
     let s = addZero(d.getUTCSeconds());
 
-    let time = h + timeZone + ':' + m + ':' + s;
-    setTime(time)
+    let time = addZero(h) + ':' + m + ':' + s;
+    return time
+  }
 
-    }, 1000);
+  useEffect(() => {
+  const interval = setInterval(() => setTime(setTimeZone()), 1000);
     return () => clearInterval(interval);
   }, []);
 
