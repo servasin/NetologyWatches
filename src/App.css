@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.error {
+  display: block;
+  color: red;
+}
+
 .toolbar {
   border-bottom: 1px solid gray;
 }

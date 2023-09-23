@@ -1,15 +1,17 @@
 import List from "./List";
 import Toolbar from "./Toolbar";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 
 function Watches() {
 
   const [arr, setArr] = useState([
-    { id: self.crypto.randomUUID(), name: 'Москва', timeZone: 3 },
+    { id: uuidv4(), name: 'Москва', timeZone: 3 },
   ])
 
   function addItem(item) {
-    item.id = self.crypto.randomUUID();
+    item.id = uuidv4();
     setArr([...arr, item])
   }
 

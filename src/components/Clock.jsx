@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 const Clock = ({timeZone}) =>{
   timeZone = Number(timeZone)
 
-  const [ctime,setTime] = useState(setTimeZone())
-
   function setTimeZone() {
     const addZero = i => { return i < 10 ? '0' + i : i }
     const get24Hours = n => { return n > 23 ? n - 24 : n }
@@ -18,6 +16,8 @@ const Clock = ({timeZone}) =>{
     let time = addZero(h) + ':' + m + ':' + s;
     return time
   }
+
+  const [ctime,setTime] = useState(setTimeZone())
 
   useEffect(() => {
   const interval = setInterval(() => setTime(setTimeZone()), 1000);
